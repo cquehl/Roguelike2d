@@ -1,0 +1,54 @@
+# Unity generated files
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+
+# Auto-generated VS/MD project files
+/*.csproj
+/*.unityproj
+/*.sln
+/*.suo
+/*.tmp
+/*.user
+/*.userprefs
+/*.pidb
+/*.booproj
+/*.svd
+/*.pdb
+
+# Unity3D generated meta files
+*.pidb.meta
+
+# Mac generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+# Visual Studio Code generated files
+.vscode/
+
+# Rider generated files
+.idea/
+
+# Unity Package Manager
+/PackageManager/
+
+# Unity Cloud Build
+/cloud/
+/cloud/
+/Assets/Settings/CloudBuildManifest.asset
+
+# Compiled dynamic libraries
+/*.dll
+/*.exe
+
+# Unity Hub
+/[Uu]nity[Vv]ersion.txt
