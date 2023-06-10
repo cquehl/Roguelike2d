@@ -5,7 +5,7 @@ using System.Collections;
 public class Loader : MonoBehaviour
 {
     public GameObject gameManager;            //GameManager prefab to instantiate.
-    //public GameObject soundManager;            //SoundManager prefab to instantiate.
+		public GameObject soundManager;			//SoundManager prefab to instantiate.
 
 
     void Awake()
@@ -17,9 +17,9 @@ public class Loader : MonoBehaviour
             Instantiate(gameManager);
 
         ////Check if a SoundManager has already been assigned to static variable SoundManager.instance or if it's still null
-        //if (SoundManager.instance == null)
-
-        //    //Instantiate SoundManager prefab
-        //    Instantiate(soundManager);
+			//if (SoundManager.instance == null)
+				
+			//	//Instantiate SoundManager prefab
+			//	Instantiate(soundManager);
     }
 }

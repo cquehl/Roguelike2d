@@ -1,7 +1,8 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;        //Allows us to use Lists. 
-
+	using UnityEngine.UI;					//Allows us to use UI.
 public class GameManager : MonoBehaviour
 {
     //Static instance of GameManager which allows it to be accessed by any other script.

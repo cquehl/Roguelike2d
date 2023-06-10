@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
-using UnityEngine.SceneManagement;        //Allows us to use SceneManager
+using UnityEngine.UI;	//Allows us to use UI.
+using UnityEngine.SceneManagement;
 
 //Player inherits from MovingObject, our base class for objects that can move, Enemy also inherits from this.
 public class Player : MovingObject
@@ -13,7 +14,7 @@ public class Player : MovingObject
     public int pointsPerSoda = 20;
     //How much damage a player does to a wall whne chopping it.
     public int wallDamage = 1;
-
+		public Text foodText;						//UI Text to display current player food total.
     //Used to store a refrence to the Player's animator component
     private Animator animator;
     //Used to store player food points total during level.
@@ -27,8 +28,10 @@ public class Player : MovingObject
         animator = GetComponent<Animator>();
 
         //Get the current food point total stored in GameManager.instance between levels.
-        food = 100;// GameManager.instance.playerFoodPoints;
-
+			//food = GameManager.instance.playerFoodPoints;
+			
+			//Set the foodText to reflect the current player food total.
+			foodText.text = "Food: " + food;
         //Call the Start function of the MovingObject base class.
         base.Start();
     }
@@ -38,14 +41,14 @@ public class Player : MovingObject
     private void OnDisable()
     {
         //When Player object is disabled, store the current local food total in the GameManager so it can be re-loaded in next level.
-        //GameManager.instance.playerFoodPoints = food;
+			//GameManager.instance.playerFoodPoints = food;
     }
 
 
     private void Update()
     {
         //If it's not the player's turn, exit the function.
-        //if (!GameManager.instance.playersTurn) return;
+			//if(!GameManager.instance.playersTurn) return;
 
         int horizontal = 0;      //Used to store the horizontal move direction.
         int vertical = 0;        //Used to store the vertical move direction.
@@ -78,7 +81,10 @@ public class Player : MovingObject
     {
         //Every time player moves, subtract from food points total.
         food--;
-
+			
+			//Update food text display to reflect current score.
+			foodText.text = "Food: " + food;
+			
         //Call the AttemptMove method of the base class, passing in the component T (in this case Wall) and x and y direction to move.
         base.AttemptMove<T>(xDir, yDir);
 
@@ -94,8 +100,8 @@ public class Player : MovingObject
         //Since the player has moved and lost food points, check if the game has ended.
         CheckIfGameOver();
 
-        //Set the playersTurn boolean of GameManager to false now that players turn is over.
-        //GameManager.instance.playersTurn = false;
+			//Set the playersTurn boolean of GameManager to false now that players turn is over.
+			//GameManager.instance.playersTurn = false;
     }
 
 
@@ -132,7 +138,10 @@ public class Player : MovingObject
         {
             //Add pointsPerFood to the players current food total.
             food += pointsPerFood;
-
+				
+				//Update foodText to represent current total and notify player that they gained points
+				foodText.text = "+" + pointsPerFood + " Food: " + food;
+				
             //Disable the food object the player collided with.
             other.gameObject.SetActive(false);
         }
@@ -143,7 +152,9 @@ public class Player : MovingObject
             //Add pointsPerSoda to players food points total
             food += pointsPerSoda;
 
-
+				//Update foodText to represent current total and notify player that they gained points
+				foodText.text = "+" + pointsPerSoda + " Food: " + food;
+				
             //Disable the soda object the player collided with.
             other.gameObject.SetActive(false);
         }
@@ -153,8 +164,9 @@ public class Player : MovingObject
     //Restart reloads the scene when called.
     private void Restart()
     {
+			//Load the last scene loaded, in this case Main, the only scene in the game. And we load it in "Single" mode so it replace the existing one
         //Load the last scene loaded, in this case Main, the only scene in the game.
-        SceneManager.LoadScene(0);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex, LoadSceneMode.Single);
     }
 
 
@@ -167,7 +179,9 @@ public class Player : MovingObject
 
         //Subtract lost food points from the players total.
         food -= loss;
-
+			
+			//Update the food display with the new total.
+			foodText.text = "-"+ loss + " Food: " + food;
         //Check to see if game has ended.
         CheckIfGameOver();
     }
@@ -180,8 +194,8 @@ public class Player : MovingObject
         if (food <= 0)
         {
 
-            //Call the GameOver function of GameManager.
-            //GameManager.instance.GameOver();
+				//Call the GameOver function of GameManager.
+				//GameManager.instance.GameOver ();
         }
     }
 }
